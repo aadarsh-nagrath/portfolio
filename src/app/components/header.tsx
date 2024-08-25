@@ -31,7 +31,7 @@ export const Header = () => {
                     <HoverCardTrigger asChild>
                         <Button variant="link">
                             <Avatar className="h-16 w-16 top-5 right-3">
-                                <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                                <AvatarImage src="https://avatars.githubusercontent.com/u/92307537?s=400&u=23303c45284658483e5c271885e4af743bd861d4&v=4" alt="@shadcn" />
                                 <AvatarFallback>Aadarsh</AvatarFallback>
                             </Avatar>
                         </Button>
@@ -46,7 +46,7 @@ export const Header = () => {
                                 <div className="flex items-center pt-2">
                                     <CalendarDays className="mr-2 h-4 w-4 opacity-70" />
                                     <span className="text-xs text-muted-foreground">
-                                        Created on 6 Aug'24
+                                        Created on 6 Aug&apos;24
                                     </span>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@ export const Header = () => {
                         <AlertDialogHeader>
                             <AlertDialogTitle>Would you like to download my Resume ??</AlertDialogTitle>
                             <AlertDialogDescription>
-                                Click on "View" to just view the resume and "Download" to
+                                Click on &quot;View&quot; to just view the resume and &quot;Download&quot; to
                                 download the pdf.
                             </AlertDialogDescription>
                         </AlertDialogHeader>
