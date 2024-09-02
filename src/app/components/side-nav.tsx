@@ -14,28 +14,40 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar";
+import { useState } from "react";
 
-export default function SideNav() {
+type OnSelectType = {
+    OnSelectScreen: (value: number) => void;
+}
+
+export default function SideNav({OnSelectScreen}:OnSelectType) {
+    const [activeIndx, SetActiveIndx] = useState<number>(0);
+
+    const handleSubmit = (value: number) => {
+        SetActiveIndx(value);
+        OnSelectScreen(value);
+    }
+
   return (
     <>
       <div className="flex flex-col w-16 absolute top-[27%] mx-2 gap-4">
         <div className="flex flex-col justify-evenly items-center space-y-8">
-          <Button variant="ghost">
+          <Button variant="ghost" onClick={()=>handleSubmit(0)}>
             <ion-icon name="home-sharp" style={{ fontSize: '30px', color: 'gray' }}></ion-icon>
           </Button>
-          <Button variant="ghost">
+          <Button variant="ghost" onClick={()=>handleSubmit(1)}>
             <ion-icon name="caret-up-circle-sharp" style={{ fontSize: '30px', color: 'gray' }}></ion-icon>
           </Button>
-          <Button variant="ghost">
+          <Button variant="ghost" onClick={()=>handleSubmit(2)}>
             <ion-icon name="navigate-sharp" style={{ fontSize: '30px', color: 'gray' }}></ion-icon>
           </Button>
-          <Button variant="ghost">
+          <Button variant="ghost" onClick={()=>handleSubmit(3)}>
             <ion-icon name="trophy-sharp" style={{ fontSize: '30px', color: 'gray' }}></ion-icon>
           </Button>
-          <Button variant="ghost">
+          <Button variant="ghost" onClick={()=>handleSubmit(4)}> 
             <ion-icon name="aperture-sharp" style={{ fontSize: '30px', color: 'gray' }}></ion-icon>
           </Button>
-          <Button variant="ghost">
+          <Button variant="ghost" onClick={()=>handleSubmit(5)}>
             <ion-icon name="mail-open-sharp" style={{ fontSize: '30px', color: 'gray' }}></ion-icon>
           </Button>
         </div>
