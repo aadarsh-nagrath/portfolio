@@ -39,9 +39,9 @@ export default function StartLayout() {
       <div>
       <Tabs defaultValue="about" className="w-[600px]">
       <TabsList className="grid w-full grid-cols-3">
-        <TabsTrigger value="about">ABOUT</TabsTrigger>
-        <TabsTrigger value="skills">SKILLS</TabsTrigger>
-        <TabsTrigger value="achieve">ACHIEVEMENTS</TabsTrigger>
+        <TabsTrigger value="about" className="border">ABOUT</TabsTrigger>
+        <TabsTrigger value="skills" className="border">SKILLS</TabsTrigger>
+        <TabsTrigger value="socials" className="border">SOCIALS</TabsTrigger>
       </TabsList>
       <TabsContent value="about">
         <Card>
@@ -83,10 +83,10 @@ export default function StartLayout() {
         </Card>
       </TabsContent>
 
-      <TabsContent value="achieve">
+      <TabsContent value="socials">
         <Card>
           <CardHeader>
-            <CardTitle>ACHIEVEMENTS</CardTitle>
+            <CardTitle>SOCIALS</CardTitle>
             <CardDescription>
             Add Achievements in this section in this section
             </CardDescription>
