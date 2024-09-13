@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import BlogCard from "../components/blog-card";
+import Custom404 from "./notFound";
 
 interface BlogData {
     title: string;
@@ -38,7 +39,7 @@ export const BlogScreen = () => {
     }, []);
     
     if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error}</p>;
+    if (error) return <Custom404/>;
 
     return (
         <div>

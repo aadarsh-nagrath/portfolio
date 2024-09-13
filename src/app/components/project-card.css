@@ -1,0 +1,23 @@
+.project-card {
+  @apply relative flex flex-col items-center justify-between shadow-md hover:shadow-lg p-5 rounded-lg transition-shadow duration-300;
+}
+
+.image-container {
+  @apply relative w-full h-48 overflow-hidden rounded-lg;
+}
+
+img {
+  @apply w-full h-full object-cover;
+}
+
+.project-description {
+  @apply absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-80 text-white p-5;
+}
+
+h3 {
+  @apply mt-4 text-lg font-semibold;
+}
+
+.visit-button {
+  @apply mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700;
+}
