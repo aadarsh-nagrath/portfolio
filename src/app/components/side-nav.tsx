@@ -91,7 +91,7 @@ export default function SideNav({OnSelectScreen}:OnSelectType) {
           </Dialog>
 
           <Avatar className="mt-5">
-            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+            <AvatarImage src="https://avatars.githubusercontent.com/u/92307537?s=400&u=23303c45284658483e5c271885e4af743bd861d4&v=4" alt="@shadcn" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
         </div>

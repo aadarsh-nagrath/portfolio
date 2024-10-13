@@ -23,6 +23,15 @@ import {
 } from "@/components/ui/alert-dialog"
 
 export const Header = () => {
+
+	const handleViewClick = () => {
+		window.open("https://shorturl.at/NVkD1", "_blank");
+	};
+        const handleDownloadClick = () => {
+                window.open("https://drive.usercontent.google.com/download?id=1qvFI6Gru7vGasb9NNL_V4HaHoMMs5LT-&export=download&authuser=0", "_blank");
+        };
+
+
     return (
         <div className="flex items-center justify-between p-4 ">
             {/* Avatar Section */}
@@ -31,7 +40,7 @@ export const Header = () => {
                     <HoverCardTrigger asChild>
                         <Button variant="link">
                             <Avatar className="h-16 w-16 top-5 right-3">
-                                <AvatarImage src="https://avatars.githubusercontent.com/u/92307537?s=400&u=23303c45284658483e5c271885e4af743bd861d4&v=4" alt="@shadcn" />
+                                <AvatarImage src="https://media.licdn.com/dms/image/v2/D5603AQF3w1vt7KGVmQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1728588963624?e=1733961600&v=beta&t=UUeSFYiJOoO9AZbuRay07piAziLKTwsOuOkEFeNA6P4" alt="@shadcn" />
                                 <AvatarFallback>Aadarsh</AvatarFallback>
                             </Avatar>
                         </Button>
@@ -93,8 +102,8 @@ export const Header = () => {
                         </AlertDialogHeader>
                         <AlertDialogFooter>
                             <AlertDialogCancel>CANCEL</AlertDialogCancel>
-                            <AlertDialogAction>VIEW</AlertDialogAction>
-                            <AlertDialogAction>DOWNLOAD</AlertDialogAction>
+                            <AlertDialogAction onClick={handleViewClick}  >VIEW</AlertDialogAction>
+                            <AlertDialogAction onClick={handleDownloadClick}>DOWNLOAD</AlertDialogAction>
                         </AlertDialogFooter>
                     </AlertDialogContent>
                 </AlertDialog>

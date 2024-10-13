@@ -20,20 +20,17 @@ export default function StartLayout() {
     <div className="flex md:flex-row w-[60%] h-[50%] bg-gradient-to-r rounded-xl relative top-8 left-8 shadow-lg overflow-hidden md:p-6">
       <div className="relative w-96 h-96 ">
         <img
-          src="https://avatars.githubusercontent.com/u/92307537?s=400&u=23303c45284658483e5c271885e4af743bd861d4&v=4"
-          alt="Cool Monkey"
-          className="w-[350px] h-full object-cover rounded-xl"
+          src="https://media.licdn.com/dms/image/v2/D5603AQF3w1vt7KGVmQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1728588963624?e=1733961600&v=beta&t=UUeSFYiJOoO9AZbuRay07piAziLKTwsOuOkEFeNA6P4"
+          alt="Aadarsh"
+          className="w-[350px] h-full object-cover rounded-xl "
           style={{ aspectRatio: "350/350", objectFit: "cover" }}
         />
 
         <div className="absolute top-3 right-8 bg-black bg-opacity-60 text-white text-xs font-semibold py-1 px-2 rounded-lg">
           Aadarsh  Nagrath
         </div>
-        <div className=" absolute bottom-3 left-3 bg-white bg-opacity-80 p-3 rounded-lg shadow-lg ">
-          <p className="text-gray-700 text-sm">Current Bid</p>
-          <p className="text-xl font-bold text-blue-500">1.52 ETH</p>
-          <p className="text-gray-500 text-xs">$4,464.29</p>
-          <Button className="mt-2 w-full bg-blue-500 text-white">Bid Now</Button>
+        <div className=" absolute bottom-2 left-2 bg-white bg-opacity-80 p-1 rounded-lg shadow-sm ">
+          <Button className="mt-2 w-full bg-green-500 text-white" onClick={()=>{window.location.href="https://github.com/aadarsh-nagrath" }} >GitHUB</Button>
         </div>
       </div>
       <div>
