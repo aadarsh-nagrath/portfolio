@@ -47,3 +47,5 @@ Score: 92% | August 2020 – May 2021 | Bhopal, India
 
 ## Get in Touch
 Feel free to reach out to me through [LinkedIn](https://linkedin.com/in/aadarsh-nagrath) or check out my [GitHub](https://github.com/aadarsh-nagrath) to explore more of my work!
+
+DockerImage - aadarshnagrath/portfolio:latest

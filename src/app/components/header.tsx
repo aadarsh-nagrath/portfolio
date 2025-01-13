@@ -40,7 +40,7 @@ export const Header = () => {
                     <HoverCardTrigger asChild>
                         <Button variant="link">
                             <Avatar className="h-16 w-16 top-5 right-3">
-                                <AvatarImage src="https://media.licdn.com/dms/image/v2/D5603AQF3w1vt7KGVmQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1728588963624?e=1733961600&v=beta&t=UUeSFYiJOoO9AZbuRay07piAziLKTwsOuOkEFeNA6P4" alt="@shadcn" />
+                                <AvatarImage src="https://img.freepik.com/premium-vector/alphabet-letter-icon-logo-letter-logo-logo-letter-design-creative-modern-letter-logo_657409-124.jpg" alt="@shadcn" />
                                 <AvatarFallback>Aadarsh</AvatarFallback>
                             </Avatar>
                         </Button>

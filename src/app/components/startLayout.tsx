@@ -20,7 +20,7 @@ export default function StartLayout() {
     <div className="flex md:flex-row w-[60%] h-[50%] bg-gradient-to-r rounded-xl relative top-8 left-8 shadow-lg overflow-hidden md:p-6">
       <div className="relative w-96 h-96 ">
         <img
-          src="https://media.licdn.com/dms/image/v2/D5603AQF3w1vt7KGVmQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1728588963624?e=1733961600&v=beta&t=UUeSFYiJOoO9AZbuRay07piAziLKTwsOuOkEFeNA6P4"
+          src="https://media.licdn.com/dms/image/v2/D5603AQF3w1vt7KGVmQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1728588963624?e=1742428800&v=beta&t=cukP8cy-qaNwKpzSW8Tf2-IaVfi2C3a54PuvFF5zMKs"
           alt="Aadarsh"
           className="w-[350px] h-full object-cover rounded-xl "
           style={{ aspectRatio: "350/350", objectFit: "cover" }}
