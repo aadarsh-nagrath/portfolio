@@ -1,5 +1,7 @@
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Trophy, Award, GraduationCap, Code2, Star, BookOpen } from "lucide-react";
 
 export const AnCScreen = () => {
   const containerRef = useRef(null);
@@ -15,6 +17,8 @@ export const AnCScreen = () => {
   const achievements = [
     {
       title: "Hackathon Achievements",
+      icon: Trophy,
+      color: "from-blue-500/20 to-cyan-500/20",
       items: [
         {
           name: "IIT-R Cognizance",
@@ -32,6 +36,8 @@ export const AnCScreen = () => {
     },
     {
       title: "Competitions & Activities",
+      icon: Award,
+      color: "from-purple-500/20 to-pink-500/20",
       items: [
         {
           name: "Debates & Speech",
@@ -55,6 +61,8 @@ export const AnCScreen = () => {
     },
     {
       title: "Certifications",
+      icon: GraduationCap,
+      color: "from-emerald-500/20 to-teal-500/20",
       items: [
         {
           name: "AWS Academy Graduate",
@@ -72,6 +80,8 @@ export const AnCScreen = () => {
     },
     {
       title: "Problem Solving",
+      icon: Code2,
+      color: "from-orange-500/20 to-amber-500/20",
       items: [
         {
           name: "LeetCode",
@@ -83,35 +93,68 @@ export const AnCScreen = () => {
     }
   ];
 
-  const getGradient = (type: string) => {
-    switch (type) {
-      case "hackathon":
-        return "from-blue-400 to-cyan-500";
-      case "competition":
-        return "from-purple-400 to-pink-500";
-      case "certification":
-        return "from-green-400 to-emerald-500";
-      case "activity":
-        return "from-orange-400 to-red-500";
-      case "achievement":
-        return "from-yellow-400 to-orange-500";
-      default:
-        return "from-gray-400 to-gray-500";
-    }
-  };
+  return (
+    <div ref={containerRef} className="min-h-screen bg-background">
+      {/* Header Section */}
+      <div className="relative overflow-hidden bg-card">
+        <motion.div 
+          className="absolute inset-0"
+          animate={{
+            background: [
+              "linear-gradient(45deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 50%, rgba(236, 72, 153, 0.1) 100%)",
+              "linear-gradient(45deg, rgba(236, 72, 153, 0.1) 0%, rgba(99, 102, 241, 0.1) 50%, rgba(168, 85, 247, 0.1) 100%)",
+              "linear-gradient(45deg, rgba(168, 85, 247, 0.1) 0%, rgba(236, 72, 153, 0.1) 50%, rgba(99, 102, 241, 0.1) 100%)",
+              "linear-gradient(45deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 50%, rgba(236, 72, 153, 0.1) 100%)"
+            ]
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
+        <motion.div 
+          className="absolute inset-0 opacity-50"
+          animate={{
+            background: [
+              "radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.1) 0%, transparent 50%)",
+              "radial-gradient(circle at 100% 0%, rgba(168, 85, 247, 0.1) 0%, transparent 50%)",
+              "radial-gradient(circle at 100% 100%, rgba(236, 72, 153, 0.1) 0%, transparent 50%)",
+              "radial-gradient(circle at 0% 100%, rgba(99, 102, 241, 0.1) 0%, transparent 50%)",
+              "radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.1) 0%, transparent 50%)"
+            ]
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
+        <div className="container relative mx-auto px-4 py-20">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center justify-center gap-3 mb-6"
+            >
+              <Trophy className="h-8 w-8 text-primary" />
+              <h1 className="text-4xl font-bold tracking-tight">Achievements & Certificates</h1>
+            </motion.div>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-muted-foreground text-lg mb-12"
+            >
+              A collection of my accomplishments, certifications, and contributions
+            </motion.p>
+          </div>
+        </div>
+      </div>
 
-    return (
-    <div ref={containerRef} className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
-      <div className="relative container mx-auto px-4 py-16 max-w-6xl">
-        <motion.h1 
-          className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          Achievements & Certificates
-        </motion.h1>
-
+      {/* Main Content */}
+      <div className="container mx-auto px-4 py-16 max-w-6xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {achievements.map((section, sectionIndex) => (
             <motion.div
@@ -121,43 +164,49 @@ export const AnCScreen = () => {
               transition={{ duration: 0.5, delay: sectionIndex * 0.2 }}
               className="relative"
             >
-              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-blue-500 to-purple-500 rounded-full" />
-              <div className="relative bg-gradient-to-r from-gray-800/50 to-gray-900/50 backdrop-blur-xl rounded-2xl p-6 border border-gray-700/50 hover:border-blue-500/30 transition-all duration-300">
-                <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-                  {section.title}
-                </h2>
-                <div className="space-y-4">
-                  {section.items.map((item, itemIndex) => (
-                    <motion.div
-                      key={item.name}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: itemIndex * 0.1 }}
-                      whileHover={{ scale: 1.02 }}
-                      className="relative group"
-                    >
-                      <div className={`absolute inset-0 bg-gradient-to-r ${getGradient(item.type)} opacity-0 group-hover:opacity-10 rounded-xl transition-opacity duration-300`} />
-                      <div className="relative p-4 rounded-xl border border-gray-700/50 group-hover:border-gray-600/50 transition-all duration-300">
-                        <div className="flex justify-between items-start mb-2">
-                          <h3 className="text-xl font-semibold text-gray-200">{item.name}</h3>
-                          <motion.span 
-                            className="px-3 py-1 rounded-full text-sm bg-gray-800/50 text-gray-300 border border-gray-700/50"
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            {item.date}
-                          </motion.span>
+              <div className={`relative rounded-2xl overflow-hidden bg-gradient-to-br ${section.color} p-8`}>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/10 to-transparent rounded-full blur-3xl" />
+                <div className="relative">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center">
+                      <section.icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <h2 className="text-2xl font-bold text-foreground">
+                      {section.title}
+                    </h2>
+                  </div>
+                  <div className="space-y-4">
+                    {section.items.map((item, itemIndex) => (
+                      <motion.div
+                        key={item.name}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.5, delay: itemIndex * 0.1 }}
+                        whileHover={{ scale: 1.02 }}
+                        className="group"
+                      >
+                        <div className="relative p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 group-hover:border-primary/40 transition-all duration-300">
+                          <div className="flex justify-between items-start mb-2">
+                            <h3 className="text-lg font-semibold text-foreground">{item.name}</h3>
+                            <motion.span 
+                              className="px-3 py-1 rounded-full text-sm bg-white/10 text-primary backdrop-blur-sm"
+                              whileHover={{ scale: 1.1 }}
+                              whileTap={{ scale: 0.95 }}
+                            >
+                              {item.date}
+                            </motion.span>
+                          </div>
+                          <p className="text-muted-foreground">{item.description}</p>
+                          <motion.div 
+                            className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary/50 to-primary rounded-full"
+                            initial={{ width: 0 }}
+                            whileInView={{ width: "100%" }}
+                            transition={{ duration: 1, delay: itemIndex * 0.2 }}
+                          />
                         </div>
-                        <p className="text-gray-400">{item.description}</p>
-                        <motion.div 
-                          className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
-                          initial={{ width: 0 }}
-                          whileInView={{ width: "100%" }}
-                          transition={{ duration: 1, delay: itemIndex * 0.2 }}
-                        />
-                      </div>
-                    </motion.div>
-                  ))}
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </motion.div>

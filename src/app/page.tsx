@@ -9,12 +9,11 @@ export default function Home() {
 
   return (
     <>
-      <div className="bg-white h-screen w-full ">
+      <div className="bg-background min-h-screen w-full">
         <Header/>
-        <SideNav  OnSelectScreen = {SetActiveScreen}  />
-        <Screen ActiveScreen = {activeScreen} />
+        <SideNav OnSelectScreen={SetActiveScreen} />
+        <Screen ActiveScreen={activeScreen} />
       </div>
-      
     </>
   );
 }

@@ -5,10 +5,10 @@ import { fetchGitHubProjects } from "../../lib/github";
 import { Input } from "../../components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select";
 import { Button } from "../../components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
 import { Separator } from "../../components/ui/separator";
-import { Github, Star, GitFork, Globe } from "lucide-react";
+import { Github, Star, GitFork, Globe, Search, Filter, SortAsc } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface ProfileData {
   avatar_url: string;
@@ -124,110 +124,169 @@ const ProjectScreen = () => {
       {/* Main Content */}
       <div className="container mx-auto px-4 pt-[200px] pb-8">
         {/* Header Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">My Projects</h1>
-          <p className="text-muted-foreground text-lg">
-            A collection of my open-source contributions and personal projects
-          </p>
-        </div>
+        <div className="relative overflow-hidden bg-card rounded-2xl mb-12">
+          <motion.div 
+            className="absolute inset-0"
+            animate={{
+              background: [
+                "linear-gradient(45deg, hsl(var(--primary)/0.1) 0%, hsl(var(--primary)/0.05) 50%, hsl(var(--primary)/0.1) 100%)",
+                "linear-gradient(45deg, hsl(var(--primary)/0.1) 0%, hsl(var(--primary)/0.05) 50%, hsl(var(--primary)/0.1) 100%)",
+                "linear-gradient(45deg, hsl(var(--primary)/0.1) 0%, hsl(var(--primary)/0.05) 50%, hsl(var(--primary)/0.1) 100%)",
+                "linear-gradient(45deg, hsl(var(--primary)/0.1) 0%, hsl(var(--primary)/0.05) 50%, hsl(var(--primary)/0.1) 100%)"
+              ]
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+          <motion.div 
+            className="absolute inset-0 opacity-50"
+            animate={{
+              background: [
+                "radial-gradient(circle at 0% 0%, hsl(var(--primary)/0.1) 0%, transparent 50%)",
+                "radial-gradient(circle at 100% 0%, hsl(var(--primary)/0.1) 0%, transparent 50%)",
+                "radial-gradient(circle at 100% 100%, hsl(var(--primary)/0.1) 0%, transparent 50%)",
+                "radial-gradient(circle at 0% 100%, hsl(var(--primary)/0.1) 0%, transparent 50%)",
+                "radial-gradient(circle at 0% 0%, hsl(var(--primary)/0.1) 0%, transparent 50%)"
+              ]
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+          <div className="relative px-8 py-12">
+            <div className="max-w-4xl mx-auto text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="flex items-center justify-center gap-3 mb-6"
+              >
+                <Github className="h-8 w-8 text-primary" />
+                <h1 className="text-4xl font-bold tracking-tight text-foreground">My Projects</h1>
+              </motion.div>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="text-muted-foreground text-lg mb-12"
+              >
+                A collection of my open-source contributions and personal projects
+              </motion.p>
 
-        {/* Search and Filter Section */}
-        <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-8">
-          <div className="w-full max-w-md">
-            <Input
-              type="text"
-              placeholder="Search projects..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full"
-            />
+              {/* Search and Filter Section */}
+              <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
+                <div className="w-full max-w-md relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    type="text"
+                    placeholder="Search projects..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-10 bg-background/50 backdrop-blur-sm border-border"
+                  />
+                </div>
+
+                <div className="flex gap-4">
+                  <Select 
+                    value={selectedLanguage}
+                    onValueChange={setSelectedLanguage}
+                  >
+                    <SelectTrigger className="w-[180px] bg-background/50 backdrop-blur-sm border-border">
+                      <Filter className="h-4 w-4 mr-2 text-muted-foreground" />
+                      <SelectValue placeholder="Language" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Languages</SelectItem>
+                      {languages.map(lang => (
+                        <SelectItem key={lang} value={lang}>{lang}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+
+                  <Select 
+                    value={sortBy} 
+                    onValueChange={(value: SortOption) => setSortBy(value)}
+                  >
+                    <SelectTrigger className="w-[180px] bg-background/50 backdrop-blur-sm border-border">
+                      <SortAsc className="h-4 w-4 mr-2 text-muted-foreground" />
+                      <SelectValue placeholder="Sort by" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="stars">Sort by Stars</SelectItem>
+                      <SelectItem value="forks">Sort by Forks</SelectItem>
+                      <SelectItem value="name">Sort by Name</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <div className="flex gap-4">
-            <Select 
-              value={selectedLanguage}
-              onValueChange={setSelectedLanguage}
-            >
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Language" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Languages</SelectItem>
-                {languages.map(lang => (
-                  <SelectItem key={lang} value={lang}>{lang}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-
-            <Select 
-              value={sortBy} 
-              onValueChange={(value: SortOption) => setSortBy(value)}
-            >
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Sort by" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="stars">Sort by Stars</SelectItem>
-                <SelectItem value="forks">Sort by Forks</SelectItem>
-                <SelectItem value="name">Sort by Name</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
         </div>
-
-        <Separator className="my-6" />
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {paginatedProjects.map((project) => (
-            <Card key={project.pid} className="flex flex-col">
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <CardTitle className="text-xl">{project.p_name}</CardTitle>
-                  <div className="flex gap-2">
-                    {project.stars !== undefined && (
-                      <Badge variant="secondary" className="flex items-center gap-1">
-                        <Star className="h-3 w-3" />
-                        {project.stars}
-                      </Badge>
-                    )}
-                    {project.forks !== undefined && (
-                      <Badge variant="outline" className="flex items-center gap-1">
-                        <GitFork className="h-3 w-3" />
-                        {project.forks}
-                      </Badge>
-                    )}
+          {paginatedProjects.map((project, index) => (
+            <motion.div
+              key={project.pid}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ scale: 1.02 }}
+              className="group relative"
+            >
+              <div className="relative rounded-2xl overflow-hidden bg-card p-6 border border-border">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl" />
+                <div className="relative">
+                  <div className="flex items-start justify-between mb-4">
+                    <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+                      {project.p_name}
+                    </h3>
+                    <div className="flex gap-2">
+                      {project.stars !== undefined && (
+                        <Badge variant="secondary" className="flex items-center gap-1">
+                          <Star className="h-3 w-3" />
+                          {project.stars}
+                        </Badge>
+                      )}
+                      {project.forks !== undefined && (
+                        <Badge variant="outline" className="flex items-center gap-1">
+                          <GitFork className="h-3 w-3" />
+                          {project.forks}
+                        </Badge>
+                      )}
+                    </div>
                   </div>
-                </div>
-                {project.language && (
-                  <Badge variant="outline" className="mt-2">
-                    {project.language}
-                  </Badge>
-                )}
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <CardDescription className="line-clamp-2">
-                  {project.p_description || "No description available"}
-                </CardDescription>
-              </CardContent>
-              <CardFooter>
-                <Button 
-                  variant="default" 
-                  className="w-full"
-                  asChild
-                >
-                  <a 
-                    href={project.p_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2"
+                  {project.language && (
+                    <Badge variant="outline" className="mb-4">
+                      {project.language}
+                    </Badge>
+                  )}
+                  <p className="text-muted-foreground mb-6 line-clamp-2">
+                    {project.p_description || "No description available"}
+                  </p>
+                  <Button 
+                    variant="default" 
+                    className="w-full"
+                    asChild
                   >
-                    <Github className="h-4 w-4" />
-                    View on GitHub
-                  </a>
-                </Button>
-              </CardFooter>
-            </Card>
+                    <a 
+                      href={project.p_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2"
+                    >
+                      <Github className="h-4 w-4" />
+                      View on GitHub
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
 
@@ -238,6 +297,7 @@ const ProjectScreen = () => {
               variant="outline"
               onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
+              className="border-border"
             >
               Previous
             </Button>
@@ -248,7 +308,7 @@ const ProjectScreen = () => {
                   key={page}
                   variant={currentPage === page ? "default" : "outline"}
                   onClick={() => setCurrentPage(page)}
-                  className="w-10 h-10"
+                  className={`w-10 h-10 ${currentPage !== page ? 'border-border' : ''}`}
                 >
                   {page}
                 </Button>
@@ -259,6 +319,7 @@ const ProjectScreen = () => {
               variant="outline"
               onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
               disabled={currentPage === totalPages}
+              className="border-border"
             >
               Next
             </Button>

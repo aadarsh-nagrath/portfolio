@@ -3,8 +3,9 @@ import {
     AvatarFallback,
     AvatarImage,
 } from "@/components/ui/avatar"
-import { CalendarDays } from "lucide-react"
+import { CalendarDays, Moon, Sun } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useTheme } from "next-themes"
 import {
   HoverCard,
   HoverCardContent,
@@ -23,33 +24,33 @@ import {
 } from "@/components/ui/alert-dialog"
 
 export const Header = () => {
+	const { theme, setTheme } = useTheme()
 
 	const handleViewClick = () => {
 		window.open("https://shorturl.at/NVkD1", "_blank");
 	};
-        const handleDownloadClick = () => {
-                window.open("https://drive.usercontent.google.com/download?id=1qvFI6Gru7vGasb9NNL_V4HaHoMMs5LT-&export=download&authuser=0", "_blank");
-        };
-
+    const handleDownloadClick = () => {
+        window.open("https://drive.usercontent.google.com/download?id=1qvFI6Gru7vGasb9NNL_V4HaHoMMs5LT-&export=download&authuser=0", "_blank");
+    };
 
     return (
-        <div className="flex items-center justify-between p-4 ">
+        <div className="flex items-center justify-between p-4 bg-background">
             {/* Avatar Section */}
             <div className="flex items-center">
                 <HoverCard>
                     <HoverCardTrigger asChild>
-                        <Button variant="link">
+                        <Button variant="link" className="text-foreground hover:text-primary">
                             <Avatar className="h-16 w-16 top-5 right-3">
                                 <AvatarImage src="https://img.freepik.com/premium-vector/alphabet-letter-icon-logo-letter-logo-logo-letter-design-creative-modern-letter-logo_657409-124.jpg" alt="@shadcn" />
                                 <AvatarFallback>Aadarsh</AvatarFallback>
                             </Avatar>
                         </Button>
                     </HoverCardTrigger>
-                    <HoverCardContent className="w-80">
+                    <HoverCardContent className="w-80 bg-card text-card-foreground border-border">
                         <div className="flex justify-between space-x-4">
                             <div className="space-y-1">
-                                <h4 className="text-sm font-semibold">@aadarsh</h4>
-                                <p className="text-sm">
+                                <h4 className="text-sm font-semibold text-foreground">@aadarsh</h4>
+                                <p className="text-sm text-muted-foreground">
                                     Dynamic Portfolio – created and maintained by aadarsh-nagrath.
                                 </p>
                                 <div className="flex items-center pt-2">
@@ -68,7 +69,7 @@ export const Header = () => {
             <div className="flex space-x-4">
                 <Button
                     variant="outline"
-                    className="flex items-center space-x-2 hover:bg-transparent focus:outline-none"
+                    className="flex items-center space-x-2 border-border hover:bg-accent hover:text-accent-foreground focus:outline-none"
                 >
                     <ion-icon name="logo-windows"></ion-icon>
                     <span>HOME</span>
@@ -76,7 +77,7 @@ export const Header = () => {
 
                 <Button
                     variant="outline"
-                    className="flex items-center space-x-2 hover:bg-transparent focus:outline-none"
+                    className="flex items-center space-x-2 border-border hover:bg-accent hover:text-accent-foreground focus:outline-none"
                 >
                     <ion-icon name="logo-windows"></ion-icon>
                     <span>BUTTON</span>
@@ -86,30 +87,39 @@ export const Header = () => {
                     <AlertDialogTrigger asChild>
                         <Button
                             variant="outline"
-                            className="flex items-center space-x-2 hover:bg-transparent focus:outline-none"
+                            className="flex items-center space-x-2 border-border hover:bg-accent hover:text-accent-foreground focus:outline-none"
                         >
                             <ion-icon name="cloud-download-outline"></ion-icon>
                             <span>RESUME</span>
                         </Button>
                     </AlertDialogTrigger>
-                    <AlertDialogContent>
+                    <AlertDialogContent className="bg-card text-card-foreground border-border">
                         <AlertDialogHeader>
-                            <AlertDialogTitle>Would you like to download my Resume ??</AlertDialogTitle>
-                            <AlertDialogDescription>
+                            <AlertDialogTitle className="text-foreground">Would you like to download my Resume ??</AlertDialogTitle>
+                            <AlertDialogDescription className="text-muted-foreground">
                                 Click on &quot;View&quot; to just view the resume and &quot;Download&quot; to
                                 download the pdf.
                             </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
-                            <AlertDialogCancel>CANCEL</AlertDialogCancel>
-                            <AlertDialogAction onClick={handleViewClick}  >VIEW</AlertDialogAction>
-                            <AlertDialogAction onClick={handleDownloadClick}>DOWNLOAD</AlertDialogAction>
+                            <AlertDialogCancel className="border-border hover:bg-accent hover:text-accent-foreground">CANCEL</AlertDialogCancel>
+                            <AlertDialogAction onClick={handleViewClick} className="bg-primary text-primary-foreground hover:bg-primary/90">VIEW</AlertDialogAction>
+                            <AlertDialogAction onClick={handleDownloadClick} className="bg-primary text-primary-foreground hover:bg-primary/90">DOWNLOAD</AlertDialogAction>
                         </AlertDialogFooter>
                     </AlertDialogContent>
                 </AlertDialog>
             </div>
             <div>
-                <Button>MODE</Button>
+                <Button
+                    variant="outline"
+                    size="icon"
+                    className="border-border hover:bg-accent hover:text-accent-foreground"
+                    onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+                >
+                    <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                    <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                    <span className="sr-only">Toggle theme</span>
+                </Button>
             </div>
         </div>
     )

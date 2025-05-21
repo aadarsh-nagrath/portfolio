@@ -2,6 +2,7 @@ import Script from 'next/script';
 import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
 import { cn } from '@/lib/utils';
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 // Font configurations
@@ -31,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <Script 
           type="module"
@@ -51,7 +52,14 @@ export default function RootLayout({
           fontBody.variable
         )}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

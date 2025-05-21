@@ -67,13 +67,13 @@ export default function StartLayout() {
   }, []);
 
   return (
-    <div className="h-screen w-full bg-gradient-to-br from-background via-card to-background">
+    <div className="h-screen w-full bg-background">
       <div className="h-full w-full">
         <div className="flex h-full">
           {/* Left Column */}
           <div className="w-1/3 flex flex-col gap-4 p-4">
             {/* Profile Card */}
-            <Card className="flex-shrink-0">
+            <Card className="flex-shrink-0 border-border">
               <CardContent className="p-4">
                 <div className="flex flex-col items-center">
                   <div className="relative w-32 h-32 mb-4">
@@ -86,7 +86,7 @@ export default function StartLayout() {
                       className="w-full h-full object-cover rounded-full"
                     />
                   </div>
-                  <h2 className="text-xl font-bold mb-1">Aadarsh Nagrath</h2>
+                  <h2 className="text-xl font-bold mb-1 text-foreground">Aadarsh Nagrath</h2>
                   <p className="text-sm text-muted-foreground mb-4">Software Engineer & Open Source Contributor</p>
                   <div className="flex gap-2 w-full">
                     <Button 
@@ -98,7 +98,7 @@ export default function StartLayout() {
                     </Button>
                     <Button 
                       variant="outline" 
-                      className="flex-1"
+                      className="flex-1 border-border hover:bg-accent hover:text-accent-foreground"
                       onClick={() => window.location.href="https://linkedin.com/in/aadarsh-nagrath"}
                     >
                       <Linkedin className="mr-2 h-4 w-4" />
@@ -110,9 +110,9 @@ export default function StartLayout() {
             </Card>
 
             {/* Stats Card */}
-            <Card className="flex-shrink-0">
+            <Card className="flex-shrink-0 border-border">
               <CardHeader className="pb-2 px-4 pt-4">
-                <CardTitle className="text-base">Quick Stats</CardTitle>
+                <CardTitle className="text-base text-foreground">Quick Stats</CardTitle>
               </CardHeader>
               <CardContent className="px-4 pb-4">
                 <div className="grid grid-cols-2 gap-4">
@@ -121,7 +121,7 @@ export default function StartLayout() {
                       <Star className="h-4 w-4 text-primary" />
                     </div>
                     <div>
-                      <p className="text-lg font-bold">{featuredRepo?.stargazers_count || 0}</p>
+                      <p className="text-lg font-bold text-foreground">{featuredRepo?.stargazers_count || 0}</p>
                       <p className="text-xs text-muted-foreground">GitHub Stars</p>
                     </div>
                   </div>
@@ -157,9 +157,9 @@ export default function StartLayout() {
             </Card>
 
             {/* Featured Project */}
-            <Card className="flex-shrink-0">
+            <Card className="flex-shrink-0 border-border">
               <CardHeader className="pb-2 px-4 pt-4">
-                <CardTitle className="text-base">Featured Project</CardTitle>
+                <CardTitle className="text-base text-foreground">Featured Project</CardTitle>
               </CardHeader>
               <CardContent className="px-4 pb-4">
                 <div className="space-y-2">
@@ -185,7 +185,7 @@ export default function StartLayout() {
                   <Button 
                     variant="outline" 
                     size="sm" 
-                    className="w-full"
+                    className="w-full border-border hover:bg-accent hover:text-accent-foreground"
                     onClick={() => window.location.href=featuredRepo?.html_url || "#"}
                   >
                     <ExternalLink className="mr-2 h-3 w-3" />
@@ -199,7 +199,7 @@ export default function StartLayout() {
           {/* Right Column */}
           <div className="w-2/3 flex flex-col p-4">
             <Tabs defaultValue="about" className="h-full" onValueChange={(value) => setActiveTab(value)}>
-              <TabsList className="grid w-full grid-cols-4 mb-4">
+              <TabsList className="grid w-full grid-cols-4 mb-4 bg-muted">
                 <TabsTrigger value="about" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                   About
                 </TabsTrigger>
@@ -216,9 +216,9 @@ export default function StartLayout() {
 
               <div className="flex-1 overflow-hidden">
                 <TabsContent value="about" className="h-full">
-                  <Card className="h-full">
+                  <Card className="h-full border-border">
                     <CardHeader className="px-4 pt-4 pb-2">
-                      <CardTitle>About Me</CardTitle>
+                      <CardTitle className="text-foreground">About Me</CardTitle>
                       <CardDescription>Software Engineer & Open Source Contributor</CardDescription>
                     </CardHeader>
                     <CardContent className="px-4 pb-4 space-y-4">
@@ -228,14 +228,14 @@ export default function StartLayout() {
                       <p className="text-sm text-muted-foreground">
                         I&apos;ve contributed to multiple open-source projects, including leading contributions to the Plone Foundation. I also have experience in developing and deploying scalable applications in a professional environment, with a strong focus on CI/CD pipelines and container orchestration.
                       </p>
-                      <Separator />
+                      <Separator className="bg-border" />
                       <div className="grid grid-cols-2 gap-4">
                         <div className="flex items-center gap-3">
                           <div className="p-2 bg-primary/10 rounded-lg">
                             <GraduationCap className="h-4 w-4 text-primary" />
                           </div>
                           <div>
-                            <p className="text-sm font-medium">Education</p>
+                            <p className="text-sm font-medium text-foreground">Education</p>
                             <p className="text-sm text-muted-foreground">B.E. Computer Science</p>
                           </div>
                         </div>
@@ -244,7 +244,7 @@ export default function StartLayout() {
                             <Award className="h-4 w-4 text-primary" />
                           </div>
                           <div>
-                            <p className="text-sm font-medium">Specialization</p>
+                            <p className="text-sm font-medium text-foreground">Specialization</p>
                             <p className="text-sm text-muted-foreground">Cloud Computing</p>
                           </div>
                         </div>
