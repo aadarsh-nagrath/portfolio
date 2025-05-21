@@ -1,54 +1,58 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
+import React from 'react';
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from '@/components/ui/button';
-import Noimg from "../../../public/no-img.png";
-import Link from 'next/link';
+import { Heart, MessageCircle, Clock, ExternalLink } from "lucide-react";
 
 interface BlogCardProps {
-  like?: number;
-  comment?: number;
-  blogtitle?: string;
-  image?: string;
-  link?:string;
+  blogtitle: string;
+  image: string;
+  link: string;
+  like: number;
+  comment: number;
 }
 
-export const BlogCard: React.FC<BlogCardProps> = ({like = 0, comment=0, blogtitle = "Card Title", image =Noimg.src, link=""}) => {
+const BlogCard: React.FC<BlogCardProps> = ({ blogtitle, image, link, like, comment }) => {
   return (
-    <Card sx={{ maxWidth: 280 }}>
-      <CardMedia
-        component="img"
-        height="60" // Reduced the image height
-        image={image}
-        alt="img"
-      />
-      <CardHeader
-        sx={{ padding: 0.4 }} // Remove padding and margin
-        titleTypographyProps={{ variant: 'h6', fontSize: '1rem' }}
-        title={blogtitle}
-      />
-      <hr/>
-      <div className='flex flex-row justify-evenly items-center'>
-        <Badge variant="outline">
-          <ion-icon name="heart-sharp" style={{ fontSize: '20px', color: 'red' }}></ion-icon>
-          {like} likes
-        </Badge>
-        <Badge variant="outline">
-          <ion-icon name="chatbubble-sharp" style={{ fontSize: '20px', color: 'gray' }}></ion-icon>
-          {comment}
-        </Badge>
-        <Button variant="ghost" className='rounded-full'>
-          <Link href={link} legacyBehavior>
-            <a target="_blank" rel="noopener noreferrer">
-              View
-            </a>
-          </Link>
-      </Button>
+    <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300">
+      <div className="relative aspect-video overflow-hidden">
+        <img
+          src={image || 'https://placehold.co/600x400'}
+          alt={blogtitle}
+          className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
+      
+      <CardContent className="p-6">
+        <h3 className="text-xl font-semibold line-clamp-2 mb-4 group-hover:text-primary transition-colors">
+          {blogtitle}
+        </h3>
+        
+        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+          <div className="flex items-center gap-1">
+            <Heart className="h-4 w-4" />
+            <span>{like}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <MessageCircle className="h-4 w-4" />
+            <span>{comment}</span>
+          </div>
+        </div>
+      </CardContent>
+
+      <CardFooter className="p-6 pt-0">
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+        >
+          Read Article
+          <ExternalLink className="h-4 w-4" />
+        </a>
+      </CardFooter>
     </Card>
   );
-}
+};
 
 export default BlogCard;

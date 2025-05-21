@@ -7,6 +7,9 @@ interface ProjectResponse {
   name: string;
   description: string;
   html_url: string;
+  language: string | null;
+  stargazers_count: number;
+  forks_count: number;
 }
 
 interface Project {
@@ -14,6 +17,9 @@ interface Project {
   p_name: string;
   p_description: string;
   p_url: string;
+  language?: string;
+  stars?: number;
+  forks?: number;
 }
 
 export const fetchGitHubProjects = async (): Promise<Project[]> => {
@@ -24,6 +30,9 @@ export const fetchGitHubProjects = async (): Promise<Project[]> => {
       p_name: repo.name,
       p_description: repo.description || '', // Default to empty string if no description
       p_url: repo.html_url,
+      language: repo.language || undefined,
+      stars: repo.stargazers_count,
+      forks: repo.forks_count
     }));
   } catch (error) {
     console.error('Error fetching repositories:', error);
