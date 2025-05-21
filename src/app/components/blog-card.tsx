@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Heart, MessageCircle, Clock, ExternalLink } from "lucide-react";
+import Image from "next/image";
 
 interface BlogCardProps {
   blogtitle: string;
@@ -15,9 +16,11 @@ const BlogCard: React.FC<BlogCardProps> = ({ blogtitle, image, link, like, comme
   return (
     <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300">
       <div className="relative aspect-video overflow-hidden">
-        <img
+        <Image
           src={image || 'https://placehold.co/600x400'}
           alt={blogtitle}
+          width={600}
+          height={400}
           className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

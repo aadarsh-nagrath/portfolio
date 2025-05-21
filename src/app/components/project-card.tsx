@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import no_image from "../../../public/no-img.png";
 
 interface ProjectCardProps {
@@ -17,9 +18,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ p_name, p_description, p_url 
     <div className="relative bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 duration-300 ease-in-out">
       {/* Image with overlay */}
       <div className="relative">
-        <img
+        <Image
           src={no_image.src || 'fallback-image.png'}
           alt={p_name}
+          width={400}
+          height={192}
           className="w-full h-48 object-cover transition-opacity duration-300 ease-in-out"
         />
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 ease-in-out">

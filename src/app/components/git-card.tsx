@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 interface ProfileProps {
   avatar_url: string;
@@ -23,9 +24,11 @@ const GitCard: React.FC<ProfileProps> = ({
 }) => {
   return (
     <div className="bg-gradient-to-r bg-black rounded-lg shadow-lg flex items-center w-full p-6">
-      <img
+      <Image
         src={avatar_url}
         alt={`${name}'s avatar`}
+        width={96}
+        height={96}
         className="rounded-full w-24 h-24 border-4 border-white shadow-lg object-cover"
       />
       <div className="ml-8 flex flex-col w-full">

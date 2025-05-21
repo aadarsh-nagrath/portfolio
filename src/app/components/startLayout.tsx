@@ -16,6 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Github, Linkedin, Mail, Globe, Code2, Cloud, Database, GitBranch, Award, Briefcase, GraduationCap, Star, Trophy, Calendar, Users, Bookmark, ExternalLink } from "lucide-react";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface BlogData {
   title: string;
@@ -77,9 +78,11 @@ export default function StartLayout() {
                 <div className="flex flex-col items-center">
                   <div className="relative w-32 h-32 mb-4">
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent rounded-full" />
-                    <img
+                    <Image
                       src="https://media.licdn.com/dms/image/v2/D5603AQF3w1vt7KGVmQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1728588963624?e=1753315200&v=beta&t=Y11Ah0KnCQbg8SPMaA6DJB1kfnJxXBepy1RD7DTY9fE"
                       alt="Aadarsh"
+                      width={128}
+                      height={128}
                       className="w-full h-full object-cover rounded-full"
                     />
                   </div>
@@ -161,9 +164,11 @@ export default function StartLayout() {
               <CardContent className="px-4 pb-4">
                 <div className="space-y-2">
                   <div className="relative aspect-[16/9] rounded-lg overflow-hidden">
-                    <img
+                    <Image
                       src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3"
                       alt="Project Preview"
+                      width={400}
+                      height={225}
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -221,7 +226,7 @@ export default function StartLayout() {
                         Passionate Software Engineer with expertise in full-stack development, cloud computing, and DevOps. Currently pursuing a Bachelor of Engineering in Computer Science with a specialization in Cloud Computing at Chandigarh University.
                       </p>
                       <p className="text-sm text-muted-foreground">
-                        I have contributed to multiple open-source projects, including leading contributions to the Plone Foundation. I also have experience in developing and deploying scalable applications in a professional environment, with a strong focus on CI/CD pipelines and container orchestration.
+                        I&apos;ve contributed to multiple open-source projects, including leading contributions to the Plone Foundation. I also have experience in developing and deploying scalable applications in a professional environment, with a strong focus on CI/CD pipelines and container orchestration.
                       </p>
                       <Separator />
                       <div className="grid grid-cols-2 gap-4">
@@ -378,7 +383,7 @@ export default function StartLayout() {
                   <Card>
                     <CardHeader>
                       <CardTitle>Connect With Me</CardTitle>
-                      <CardDescription>Let's connect and collaborate</CardDescription>
+                      <CardDescription>Let&apos;s connect and collaborate</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div className="grid grid-cols-2 gap-4">
@@ -434,9 +439,11 @@ export default function StartLayout() {
                           {latestBlogs.map((blog) => (
                             <div key={blog.url} className="flex gap-4">
                               <div className="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
-                                <img
+                                <Image
                                   src={blog.social_image}
                                   alt={blog.title}
+                                  width={96}
+                                  height={96}
                                   className="w-full h-full object-cover"
                                 />
                               </div>
