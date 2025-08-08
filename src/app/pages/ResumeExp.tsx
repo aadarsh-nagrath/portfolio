@@ -102,7 +102,7 @@ export const ResExpScreen = () => {
                         <div className="flex flex-wrap gap-4 text-muted-foreground">
                           <div className="flex items-center gap-2">
                             <Code2 className="h-4 w-4" />
-                            <span>DevOps Engineer Intern</span>
+                            <span>SDE DevOps Intern</span>
                           </div>
                           <div className="flex items-center gap-2">
                             <MapPin className="h-4 w-4" />

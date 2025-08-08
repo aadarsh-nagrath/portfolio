@@ -35,6 +35,47 @@ type SortOption = "name" | "stars" | "forks";
 
 const ITEMS_PER_PAGE = 9;
 
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut"
+    }
+  }
+};
+
+const buttonVariants = {
+  hover: { 
+    scale: 1.05, 
+    boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+    transition: { duration: 0.2 } 
+  },
+  tap: { scale: 0.95 }
+};
+
+const badgeVariants = {
+  hover: { 
+    scale: 1.1,
+    transition: { duration: 0.2 } 
+  }
+};
+
 const ProjectScreen = () => {
   const [profileData, setProfileData] = useState<ProfileData | null>(null);
   const [projects, setProjects] = useState<Project[]>([]);
@@ -93,9 +134,18 @@ const ProjectScreen = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
-      </div>
+      <motion.div 
+        className="min-h-screen bg-background flex items-center justify-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <motion.div 
+          className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+        />
+      </motion.div>
     );
   }
 
@@ -104,9 +154,19 @@ const ProjectScreen = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <motion.div 
+      className="min-h-screen bg-background"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+    >
       {/* Fixed Profile Section */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-card border-b">
+      <motion.div 
+        className="fixed top-0 left-0 right-0 z-50 bg-card border-b"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
         <div className="w-full px-4 py-4">
           <GitCard
             avatar_url={profileData.avatar_url}
@@ -119,12 +179,22 @@ const ProjectScreen = () => {
             following={profileData.following}
           />
         </div>
-      </div>
+      </motion.div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 pt-[200px] pb-8">
+      <motion.div 
+        className="container mx-auto px-4 pt-[200px] pb-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+      >
         {/* Header Section */}
-        <div className="relative overflow-hidden bg-card rounded-2xl mb-12">
+        <motion.div 
+          className="relative overflow-hidden bg-card rounded-2xl mb-12"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
           <motion.div 
             className="absolute inset-0"
             animate={{
@@ -163,170 +233,240 @@ const ProjectScreen = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
                 className="flex items-center justify-center gap-3 mb-6"
               >
-                <Github className="h-8 w-8 text-primary" />
+                <motion.div
+                  whileHover={{ rotate: 360, scale: 1.2 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Github className="h-8 w-8 text-primary" />
+                </motion.div>
                 <h1 className="text-4xl font-bold tracking-tight text-foreground">My Projects</h1>
               </motion.div>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
                 className="text-muted-foreground text-lg mb-12"
               >
                 A collection of my open-source contributions and personal projects
               </motion.p>
 
               {/* Search and Filter Section */}
-              <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
-                <div className="w-full max-w-md relative">
+              <motion.div 
+                className="flex flex-col md:flex-row gap-4 justify-between items-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.7 }}
+              >
+                <motion.div 
+                  className="w-full max-w-md relative"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
                     type="text"
                     placeholder="Search projects..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 bg-background/50 backdrop-blur-sm border-border"
+                    className="w-full pl-10 bg-background/50 backdrop-blur-sm border-border transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                   />
-                </div>
+                </motion.div>
 
                 <div className="flex gap-4">
-                  <Select 
-                    value={selectedLanguage}
-                    onValueChange={setSelectedLanguage}
-                  >
-                    <SelectTrigger className="w-[180px] bg-background/50 backdrop-blur-sm border-border">
-                      <Filter className="h-4 w-4 mr-2 text-muted-foreground" />
-                      <SelectValue placeholder="Language" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Languages</SelectItem>
-                      {languages.map(lang => (
-                        <SelectItem key={lang} value={lang}>{lang}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
+                    <Select 
+                      value={selectedLanguage}
+                      onValueChange={setSelectedLanguage}
+                    >
+                      <SelectTrigger className="w-[180px] bg-background/50 backdrop-blur-sm border-border">
+                        <Filter className="h-4 w-4 mr-2 text-muted-foreground" />
+                        <SelectValue placeholder="Language" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Languages</SelectItem>
+                        {languages.map(lang => (
+                          <SelectItem key={lang} value={lang}>{lang}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </motion.div>
 
-                  <Select 
-                    value={sortBy} 
-                    onValueChange={(value: SortOption) => setSortBy(value)}
-                  >
-                    <SelectTrigger className="w-[180px] bg-background/50 backdrop-blur-sm border-border">
-                      <SortAsc className="h-4 w-4 mr-2 text-muted-foreground" />
-                      <SelectValue placeholder="Sort by" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="stars">Sort by Stars</SelectItem>
-                      <SelectItem value="forks">Sort by Forks</SelectItem>
-                      <SelectItem value="name">Sort by Name</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
+                    <Select 
+                      value={sortBy} 
+                      onValueChange={(value: SortOption) => setSortBy(value)}
+                    >
+                      <SelectTrigger className="w-[180px] bg-background/50 backdrop-blur-sm border-border">
+                        <SortAsc className="h-4 w-4 mr-2 text-muted-foreground" />
+                        <SelectValue placeholder="Sort by" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="stars">Sort by Stars</SelectItem>
+                        <SelectItem value="forks">Sort by Forks</SelectItem>
+                        <SelectItem value="name">Sort by Name</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </motion.div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {paginatedProjects.map((project, index) => (
             <motion.div
               key={project.pid}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ scale: 1.02 }}
+              variants={cardVariants}
+              whileHover={{ 
+                y: -8, 
+                scale: 1.02,
+                transition: { duration: 0.3 }
+              }}
               className="group relative"
             >
-              <div className="relative rounded-2xl overflow-hidden bg-card p-6 border border-border">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl" />
+              <div className="relative rounded-2xl overflow-hidden bg-card p-6 border border-border hover:shadow-xl transition-all duration-300 hover:border-primary/20">
+                <motion.div 
+                  className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    opacity: [0.3, 0.6, 0.3]
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
                 <div className="relative">
                   <div className="flex items-start justify-between mb-4">
-                    <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+                    <motion.h3 
+                      className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors"
+                      whileHover={{ x: 5 }}
+                      transition={{ duration: 0.2 }}
+                    >
                       {project.p_name}
-                    </h3>
+                    </motion.h3>
                     <div className="flex gap-2">
                       {project.stars !== undefined && (
-                        <Badge variant="secondary" className="flex items-center gap-1">
-                          <Star className="h-3 w-3" />
-                          {project.stars}
-                        </Badge>
+                        <motion.div whileHover="hover" variants={badgeVariants}>
+                          <Badge variant="secondary" className="flex items-center gap-1">
+                            <Star className="h-3 w-3" />
+                            {project.stars}
+                          </Badge>
+                        </motion.div>
                       )}
                       {project.forks !== undefined && (
-                        <Badge variant="outline" className="flex items-center gap-1">
-                          <GitFork className="h-3 w-3" />
-                          {project.forks}
-                        </Badge>
+                        <motion.div whileHover="hover" variants={badgeVariants}>
+                          <Badge variant="outline" className="flex items-center gap-1">
+                            <GitFork className="h-3 w-3" />
+                            {project.forks}
+                          </Badge>
+                        </motion.div>
                       )}
                     </div>
                   </div>
                   {project.language && (
-                    <Badge variant="outline" className="mb-4">
-                      {project.language}
-                    </Badge>
+                    <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
+                      <Badge variant="outline" className="mb-4">
+                        {project.language}
+                      </Badge>
+                    </motion.div>
                   )}
                   <p className="text-muted-foreground mb-6 line-clamp-2">
                     {project.p_description || "No description available"}
                   </p>
-                  <Button 
-                    variant="default" 
-                    className="w-full"
-                    asChild
-                  >
-                    <a 
-                      href={project.p_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2"
+                  <motion.div variants={buttonVariants} whileHover="hover" whileTap="tap">
+                    <Button 
+                      variant="default" 
+                      className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 transition-all duration-300"
+                      asChild
                     >
-                      <Github className="h-4 w-4" />
-                      View on GitHub
-                    </a>
-                  </Button>
+                      <a 
+                        href={project.p_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2"
+                      >
+                        <motion.div
+                          whileHover={{ rotate: 15 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <Github className="h-4 w-4" />
+                        </motion.div>
+                        View on GitHub
+                      </a>
+                    </Button>
+                  </motion.div>
                 </div>
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-2 mt-8">
-            <Button
-              variant="outline"
-              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className="border-border"
-            >
-              Previous
-            </Button>
+          <motion.div 
+            className="flex justify-center items-center gap-2 mt-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+          >
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                variant="outline"
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="border-border"
+              >
+                Previous
+              </Button>
+            </motion.div>
             
             <div className="flex gap-2">
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                <Button
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page, index) => (
+                <motion.div
                   key={page}
-                  variant={currentPage === page ? "default" : "outline"}
-                  onClick={() => setCurrentPage(page)}
-                  className={`w-10 h-10 ${currentPage !== page ? 'border-border' : ''}`}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: index * 0.1, duration: 0.3 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
                 >
-                  {page}
-                </Button>
+                  <Button
+                    variant={currentPage === page ? "default" : "outline"}
+                    onClick={() => setCurrentPage(page)}
+                    className={`w-10 h-10 ${currentPage !== page ? 'border-border' : ''}`}
+                  >
+                    {page}
+                  </Button>
+                </motion.div>
               ))}
             </div>
 
-            <Button
-              variant="outline"
-              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-              disabled={currentPage === totalPages}
-              className="border-border"
-            >
-              Next
-            </Button>
-          </div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                variant="outline"
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className="border-border"
+              >
+                Next
+              </Button>
+            </motion.div>
+          </motion.div>
         )}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

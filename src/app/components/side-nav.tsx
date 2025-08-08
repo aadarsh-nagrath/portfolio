@@ -15,6 +15,7 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 type OnSelectType = {
     OnSelectScreen: (value: number) => void;
@@ -28,64 +29,150 @@ export default function SideNav({OnSelectScreen}:OnSelectType) {
         OnSelectScreen(value);
     }
 
+    // Animation variants
+    const containerVariants = {
+        hidden: { opacity: 0, x: -20 },
+        visible: {
+            opacity: 1,
+            x: 0,
+            transition: {
+                duration: 0.5,
+                staggerChildren: 0.1
+            }
+        }
+    };
+
+    const buttonVariants = {
+        hidden: { opacity: 0, x: -10 },
+        visible: {
+            opacity: 1,
+            x: 0,
+            transition: { duration: 0.3 }
+        },
+        hover: { 
+            scale: 1.1, 
+            x: 5,
+            transition: { duration: 0.2 } 
+        },
+        tap: { scale: 0.95 }
+    };
+
+    const avatarVariants = {
+        hidden: { opacity: 0, scale: 0.8 },
+        visible: {
+            opacity: 1,
+            scale: 1,
+            transition: { duration: 0.5, delay: 0.5 }
+        },
+        hover: { 
+            scale: 1.1, 
+            rotate: 5,
+            transition: { duration: 0.3 } 
+        },
+        tap: { scale: 0.95 }
+    };
+
+    const settingsVariants = {
+        hidden: { opacity: 0, y: 10 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.3, delay: 0.4 }
+        },
+        hover: { 
+            scale: 1.1,
+            transition: { duration: 0.2 } 
+        },
+        tap: { scale: 0.95 }
+    };
+
   return (
     <>
-      <div className="flex flex-col w-16 absolute top-[27%] mx-2 gap-4">
-        <div className="flex flex-col justify-evenly items-center space-y-8">
-          <Button 
-            variant="ghost" 
-            onClick={()=>handleSubmit(0)}
-            className={`hover:bg-accent hover:text-accent-foreground ${activeIndx === 0 ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}
-          >
-            <ion-icon name="home-sharp" style={{ fontSize: '30px' }}></ion-icon>
-          </Button>
-          <Button 
-            variant="ghost" 
-            onClick={()=>handleSubmit(1)}
-            className={`hover:bg-accent hover:text-accent-foreground ${activeIndx === 1 ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}
-          >
-            <ion-icon name="caret-up-circle-sharp" style={{ fontSize: '30px' }}></ion-icon>
-          </Button>
-          <Button 
-            variant="ghost" 
-            onClick={()=>handleSubmit(2)}
-            className={`hover:bg-accent hover:text-accent-foreground ${activeIndx === 2 ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}
-          >
-            <ion-icon name="navigate-sharp" style={{ fontSize: '30px' }}></ion-icon>
-          </Button>
-          <Button 
-            variant="ghost" 
-            onClick={()=>handleSubmit(3)}
-            className={`hover:bg-accent hover:text-accent-foreground ${activeIndx === 3 ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}
-          >
-            <ion-icon name="trophy-sharp" style={{ fontSize: '30px' }}></ion-icon>
-          </Button>
-          <Button 
-            variant="ghost" 
-            onClick={()=>handleSubmit(4)}
-            className={`hover:bg-accent hover:text-accent-foreground ${activeIndx === 4 ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}
-          > 
-            <ion-icon name="aperture-sharp" style={{ fontSize: '30px' }}></ion-icon>
-          </Button>
-          <Button 
-            variant="ghost" 
-            onClick={()=>handleSubmit(5)}
-            className={`hover:bg-accent hover:text-accent-foreground ${activeIndx === 5 ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}
-          >
-            <ion-icon name="mail-open-sharp" style={{ fontSize: '30px' }}></ion-icon>
-          </Button>
-        </div>
+      <motion.div 
+        className="flex flex-col w-16 absolute top-[27%] mx-2 gap-4"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
+        <motion.div 
+          className="flex flex-col justify-evenly items-center space-y-8"
+          variants={containerVariants}
+        >
+          <motion.div variants={buttonVariants} whileHover="hover" whileTap="tap">
+            <Button 
+              variant="ghost" 
+              onClick={()=>handleSubmit(0)}
+              className={`hover:bg-accent hover:text-accent-foreground ${activeIndx === 0 ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}
+            >
+              <ion-icon name="home-sharp" style={{ fontSize: '30px' }}></ion-icon>
+            </Button>
+          </motion.div>
+          <motion.div variants={buttonVariants} whileHover="hover" whileTap="tap">
+            <Button 
+              variant="ghost" 
+              onClick={()=>handleSubmit(1)}
+              className={`hover:bg-accent hover:text-accent-foreground ${activeIndx === 1 ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}
+            >
+              <ion-icon name="caret-up-circle-sharp" style={{ fontSize: '30px' }}></ion-icon>
+            </Button>
+          </motion.div>
+          <motion.div variants={buttonVariants} whileHover="hover" whileTap="tap">
+            <Button 
+              variant="ghost" 
+              onClick={()=>handleSubmit(2)}
+              className={`hover:bg-accent hover:text-accent-foreground ${activeIndx === 2 ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}
+            >
+              <ion-icon name="navigate-sharp" style={{ fontSize: '30px' }}></ion-icon>
+            </Button>
+          </motion.div>
+          <motion.div variants={buttonVariants} whileHover="hover" whileTap="tap">
+            <Button 
+              variant="ghost" 
+              onClick={()=>handleSubmit(3)}
+              className={`hover:bg-accent hover:text-accent-foreground ${activeIndx === 3 ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}
+            >
+              <ion-icon name="trophy-sharp" style={{ fontSize: '30px' }}></ion-icon>
+            </Button>
+          </motion.div>
+          <motion.div variants={buttonVariants} whileHover="hover" whileTap="tap">
+            <Button 
+              variant="ghost" 
+              onClick={()=>handleSubmit(4)}
+              className={`hover:bg-accent hover:text-accent-foreground ${activeIndx === 4 ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}
+            > 
+              <ion-icon name="aperture-sharp" style={{ fontSize: '30px' }}></ion-icon>
+            </Button>
+          </motion.div>
+          <motion.div variants={buttonVariants} whileHover="hover" whileTap="tap">
+            <Button 
+              variant="ghost" 
+              onClick={()=>handleSubmit(5)}
+              className={`hover:bg-accent hover:text-accent-foreground ${activeIndx === 5 ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}
+            >
+              <ion-icon name="mail-open-sharp" style={{ fontSize: '30px' }}></ion-icon>
+            </Button>
+          </motion.div>
+        </motion.div>
 
         {/* avatar and settings */}
-        <div className="flex flex-col justify-evenly items-center mt-32">
+        <motion.div 
+          className="flex flex-col justify-evenly items-center mt-32"
+          variants={containerVariants}
+        >
           <Dialog>
             <DialogTrigger asChild>
-              <Button 
-                variant="ghost"
-                className="text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+              <motion.div
+                variants={settingsVariants}
+                whileHover="hover"
+                whileTap="tap"
               >
-                <ion-icon name="settings-sharp" style={{ fontSize: '30px' }}></ion-icon>
-              </Button>
+                <Button 
+                  variant="ghost"
+                  className="text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                >
+                  <ion-icon name="settings-sharp" style={{ fontSize: '30px' }}></ion-icon>
+                </Button>
+              </motion.div>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px] bg-card text-card-foreground border-border">
               <DialogHeader>
@@ -123,12 +210,18 @@ export default function SideNav({OnSelectScreen}:OnSelectType) {
             </DialogContent>
           </Dialog>
 
-          <Avatar className="mt-5 border-2 border-border">
-            <AvatarImage src="https://avatars.githubusercontent.com/u/92307537?s=400&u=23303c45284658483e5c271885e4af743bd861d4&v=4" alt="@shadcn" />
-            <AvatarFallback className="bg-muted text-muted-foreground">CN</AvatarFallback>
-          </Avatar>
-        </div>
-      </div>
+          <motion.div
+            variants={avatarVariants}
+            whileHover="hover"
+            whileTap="tap"
+          >
+            <Avatar className="mt-5 border-2 border-border">
+              <AvatarImage src="https://avatars.githubusercontent.com/u/92307537?s=400&u=23303c45284658483e5c271885e4af743bd861d4&v=4" alt="@shadcn" />
+              <AvatarFallback className="bg-muted text-muted-foreground">CN</AvatarFallback>
+            </Avatar>
+          </motion.div>
+        </motion.div>
+      </motion.div>
     </>
   );
 }
