@@ -144,7 +144,7 @@ export default function StartLayout() {
                     >
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent rounded-full" />
                       <Image
-                        src="https://media.licdn.com/dms/image/v2/D5603AQF3w1vt7KGVmQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1728588963624?e=1757548800&v=beta&t=Id43NnH-4wGBUICcaOh9FXp1n1CyUPYCokPpagbEgC4"
+                        src="https://media.licdn.com/dms/image/v2/D5603AQF3w1vt7KGVmQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1728588963624?e=1763596800&v=beta&t=8dmw_AvVceXEHCNRT6wIacRjSqaM0RLplfX_XF8rdoA"
                         alt="Aadarsh"
                         width={128}
                         height={128}
